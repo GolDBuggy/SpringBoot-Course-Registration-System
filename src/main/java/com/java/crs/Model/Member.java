@@ -1,6 +1,7 @@
 package com.java.crs.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -42,6 +44,12 @@ public class Member {
 
     @Column(name = "roles")
     private String roles;
+
+    @ManyToMany
+    @JoinTable(name = "users_course",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name ="course_id" ))
+    private List<Course> courses;
+
 
 
 }
