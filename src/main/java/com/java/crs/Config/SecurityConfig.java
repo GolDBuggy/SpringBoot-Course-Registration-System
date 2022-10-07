@@ -38,8 +38,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests().antMatchers("/register","/login").permitAll().and()
-                .authorizeRequests().antMatchers("/join/**","/info").hasRole("STUDENT").and()
-                .authorizeRequests().antMatchers("/course/create","/calender/**").hasRole("ADMIN").and()
+                .authorizeRequests().antMatchers("/join/**","/info","/department/all").hasRole("STUDENT").and()
+                .authorizeRequests().
+                antMatchers("/course/create","/calender/**","/faculty/create","/department/create").
+                hasRole("ADMIN").and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();

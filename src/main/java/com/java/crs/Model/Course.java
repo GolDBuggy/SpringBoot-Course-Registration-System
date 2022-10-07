@@ -46,5 +46,9 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name ="calender_id" ))
     private List<Calender> calenders;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
 
 }
